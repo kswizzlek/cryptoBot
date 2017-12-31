@@ -1,0 +1,15 @@
+BITCOIN EXCHANGES API LINKS
+
+1.BITSANE - https://bitsane.com/info-api 
+
+2.BITTREX - https://bittrex.com/home/api
+
+3.GDAX - https://www.gdax.com/settings/api
+
+4.BINANCE - https://github.com/binance-exchange/binance-official-api-docs
+
+5.POLONIEX - https://poloniex.com/support/api/
+
+6.KRAKEN - https://www.kraken.com/en-us/help/api
+
+7.
