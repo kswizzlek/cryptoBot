@@ -39,6 +39,8 @@ client.get("https://bitsane.com/api/public/ticker", function (data, response) {
     // raw response 
     //console.log(response);
 
+
+    //list of all possiple currencies
     var currencies = {
         "USD" : 200,
         "BTC" : 0,
@@ -51,7 +53,8 @@ client.get("https://bitsane.com/api/public/ticker", function (data, response) {
 
     var conversionRates = {}
 
-    //Finds all the different currency combinations that are possible XPP->USD, ETH->BTC, BTC->ETH, ect...
+    //Finds all the different currency conversions that are possible XPP->USD, ETH->BTC, BTC->ETH, ect...
+    //Then calculates the conversion rates
     for (var key in currencies){
         console.log(key)
 
@@ -60,6 +63,7 @@ client.get("https://bitsane.com/api/public/ticker", function (data, response) {
             if(k != key){
                 conversionRates[key + "_" + k] = 0;
                 console.log (key + "_" + k)
+                //check to see if the conversion rate from the API is accurate or needs to be reversed
                 if(data[key + "_" + k]){
                     console.log(data[key + "_" + k])
                     conversionRates[key + "_" + k] = {
@@ -68,6 +72,12 @@ client.get("https://bitsane.com/api/public/ticker", function (data, response) {
                         "highestBid": data[key + "_" + k].highestBid,
                     }
                 }else{
+                    //reverse the conversion rates before entering them into the array 
+                    conversionRates[key + "_" + k] = {
+                        "last": (1 / data[k + "_" + key].last),
+                        "lowestAsk": (1 / data[k + "_" + key].lowestAsk),
+                        "highestBid": (1 / data[k + "_" + key].highestBid),
+                    }
                     console.log (k + "_" + key)
                     console.log(data[k + "_" + key])
                 }
@@ -76,11 +86,21 @@ client.get("https://bitsane.com/api/public/ticker", function (data, response) {
         }
     }
 
+    //create a temporary table of the conversion rates
+    var tempConversionRates = conversionRates
 
     for (var key in conversionRates){
         console.log(key)
-        console.log(conversionRates[key])
+        //if(key.includes("USD_")){
+            console.log(conversionRates[key])
+            //for 
+
+        //}
+
+
     }
+
+
 
     var usd = 200;
     var btc = 0;
